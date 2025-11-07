@@ -1,0 +1,21 @@
+{
+    "name": "Learning Journal PWA",
+    "short_name": "LearnJournal",
+    "description": "A Progressive Web App for documenting mobile development learning journey",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2c3e50",
+    "theme_color": "#3498db",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en-US",
+    "categories": ["education", "productivity"],
+    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PWA Manifest -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<!-- Theme Color for Mobile -->
+<meta name="theme-color" content="#3498db">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LearnJournal">
+
+<!-- Single Icon for all platforms -->
+<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Chandandeep Singh</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation will be inserted here by JavaScript -->
+
+    <main class="container">
+        <section class="about-section">
+            <h1>About Me</h1>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Chandandeep Singh</h2>
+                    <p>I am a passionate Computer Science student with a strong interest in mobile application development and web technologies. Currently pursuing my degree while building practical skills through projects and coursework.</p>
+
+                    <h3>Skills & Interests</h3>
+                    <ul class="skills-list">
+                        <li>HTML5, CSS, JavaScript</li>
+                        <li>Mobile App Development</li>
+                        <li>Responsive Web Design</li>
+                        <li>Progressive Web Apps</li>
+                        <li>Problem Solving</li>
+                    </ul>
+
+                    <h3>Education</h3>
+                    <p>BSc (Hons) Computer Science - University for the Creative Arts</p>
+
+                    <h3>Current Focus</h3>
+                    <p>Currently learning JavaScript DOM manipulation, mobile app development, and building responsive web applications that work across all devices.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Chandandeep Singh. All rights reserved.</p>
+    </footer>
+
+  <!-- ALL THE JS FILES - IN CORRECT ORDER -->
+<script src="js/storage.js"></script>
+<script src="js/browser.js"></script>
+<script src="js/thirdparty.js"></script>
+<script src="js/script.js"></script>
+
+
+<script>
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('{{ url_for("static", filename="js/sw.js") }}')
+                .then(function(registration) {
+                    console.log('✅ ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('❌ ServiceWorker registration failed: ', error);
+                });
+        });
+    }
+
+    // Online/Offline Detection (Extra Feature)
+    function updateOnlineStatus() {
+        const statusElement = document.getElementById('network-status');
+        if (statusElement) {
+            if (navigator.onLine) {
+                statusElement.innerHTML = '🟢 Online';
+                statusElement.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+            } else {
+                statusElement.innerHTML = '🔴 Offline - Using cached data';
+                statusElement.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+            }
+        }
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', updateOnlineStatus);
+
+    // PWA Installation Prompt
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallPromotion();
+    });
+
+    function showInstallPromotion() {
+        const installBtn = document.createElement('button');
+        installBtn.innerHTML = '📱 Install App';
+        installBtn.className = 'btn-primary';
+        installBtn.style.margin = '0.5rem';
+        installBtn.onclick = installPWA;
+
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.appendChild(installBtn);
+        }
+    }
+
+    async function installPWA() {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+
+        if (outcome === 'accepted') {
+            console.log('✅ User accepted the install prompt');
+            showSuccessMessage('App installed successfully! 🎉');
+        } else {
+            console.log('❌ User dismissed the install prompt');
+        }
+
+        deferredPrompt = null;
+    }
+</script>
+</body>
+</html>
