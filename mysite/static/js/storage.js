@@ -1,6 +1,6 @@
-// js/storage.js - Storage API Functions for Lab 6: Flask Backend + Local Storage
+// js/storage.js - Storage API Functions for Flask Backend + Local Storage
 
-// ===== LOCAL STORAGE FUNCTIONS (Lab 4) =====
+// ===== LOCAL STORAGE FUNCTIONS =====
 function saveJournalEntries() {
     const entries = [];
     document.querySelectorAll('.journal-entry[data-is-new="true"]').forEach(entry => {
@@ -124,7 +124,7 @@ function calculateStorageUsage() {
     return (total / 1024).toFixed(2);
 }
 
-// ===== FLASK BACKEND INTEGRATION (Lab 6) =====
+// ===== FLASK BACKEND INTEGRATION  =====
 const FLASK_API_BASE = '/api/reflections';
 
 async function fetchFlaskReflections() {
@@ -352,7 +352,7 @@ function updateReflectionCounter() {
                 </div>
             </div>
             <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                🚀 Lab 6: Flask backend deployed on PythonAnywhere
+                🚀 Flask backend deployed on PythonAnywhere
             </div>
         </div>
     `;
