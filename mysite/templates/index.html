@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- PWA Manifest -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<!-- Theme Color for Mobile -->
+<meta name="theme-color" content="#3498db">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LearnJournal">
+
+<!-- Single Icon for all platforms -->
+<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandandeep Singh - Learning Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation will be inserted here by JavaScript -->
+
+    <main class="container">
+        <section class="hero">
+            <h1>Welcome to My Learning Journal</h1>
+            <p>This is my personal space where I document my journey through the Mobile Application Development course and showcase my projects.</p>
+            <div class="live-date">
+                <strong>Today's Date:</strong> <span id="live-date"></span>
+            </div>
+            <button id="theme-toggle" class="theme-btn">🌙 Dark Mode</button>
+        </section>
+
+        <section class="recent-posts">
+            <h2>Recent Journal Entries</h2>
+            <div class="posts-grid">
+
+
+        <!-- Week 7: PWA Enhancement -->
+        <article class="post-card">
+            <h3>Week 7: PWA Enhancement</h3>
+            <p>Enhanced the Learning Journal with Progressive Web App features including service worker for offline functionality, web app manifest for installability, and network status detection.</p>
+            <a href="{{ url_for('journal') }}">Read more</a>
+        </article>
+
+                <!-- Week 6: Flask Backend & PythonAnywhere -->
+                <article class="post-card">
+                    <h3>Week 6: Flask Backend & PythonAnywhere</h3>
+                    <p>Implemented Flask backend with RESTful API, deployed on PythonAnywhere. Added GET/POST/DELETE endpoints for reflections with frontend-backend integration.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+
+                <!-- Week 5: Python & JSON Backend -->
+                <article class="post-card">
+                    <h3>Week 5: Python & JSON Backend</h3>
+                    <p>Integrated Python and JSON for backend data storage. Created a Python script to manage journal entries and display them in the PWA through JavaScript fetch API.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+
+                <article class="post-card">
+                    <h3>Week 4: Web APIs</h3>
+                    <p>Exploring Storage API, Browser APIs (Clipboard, Validation), and Third-Party APIs (YouTube). Learning to make web applications more powerful and interactive.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+
+                <article class="post-card">
+                    <h3>Week 3: JavaScript & DOM</h3>
+                    <p>Learning JavaScript DOM manipulation, event handling, and making web pages interactive. Exploring reusable navigation, theme switching, and form validation.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+
+                <article class="post-card">
+                    <h3>Week 2: Frontend Fundamentals</h3>
+                    <p>Exploring HTML, CSS, and responsive design principles for mobile applications. Mobile-first approach and Flexbox layout techniques.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+
+                <article class="post-card">
+                    <h3>Week 1: Introduction to Mobile Development</h3>
+                    <p>Getting started with mobile development concepts, Progressive Web Apps, and setting up the development environment and project structure.</p>
+                    <a href="{{ url_for('journal') }}">Read more</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Chandandeep Singh. All rights reserved.</p>
+    </footer>
+
+         <!-- ALL THE JS FILES - IN CORRECT ORDER -->
+    <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/thirdparty.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // ===== ENHANCED SERVICE WORKER - FIXED OFFLINE NAVIGATION =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Use absolute path - CRITICAL
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ ServiceWorker registered successfully with scope:', registration.scope);
+
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('🔄 New Service Worker found...');
+
+                            newWorker.addEventListener('statechange', () => {
+                                console.log('🔄 Service Worker state:', newWorker.state);
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('🔄 New content available!');
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ ServiceWorker registration failed:', error);
+                    });
+
+                // Handle controller changes
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        console.log('🔄 Controller changed - reloading page');
+                        window.location.reload();
+                    }
+                });
+            });
+        }
+
+        // ===== ONLINE/OFFLINE DETECTION =====
+        function updateOnlineStatus() {
+            const statusElement = document.getElementById('network-status');
+            if (statusElement) {
+                if (navigator.onLine) {
+                    statusElement.innerHTML = '🟢 Online';
+                    statusElement.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+                    // Auto-hide after 3 seconds when online
+                    setTimeout(() => {
+                        if (navigator.onLine && statusElement.innerHTML === '🟢 Online') {
+                            statusElement.style.display = 'none';
+                        }
+                    }, 3000);
+                } else {
+                    statusElement.innerHTML = '🔴 Offline - Using cached content';
+                    statusElement.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+                    statusElement.style.display = 'block';
+                }
+            }
+        }
+
+        // Initialize online/offline detection
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        document.addEventListener('DOMContentLoaded', updateOnlineStatus);
+
+        // ===== PWA INSTALLATION =====
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('📱 PWA install prompt available');
+        });
+
+        // Make functions globally available
+        window.updateOnlineStatus = updateOnlineStatus;
+    </script>
+
+</body>
+</html>

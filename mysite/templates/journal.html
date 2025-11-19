@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- PWA Manifest -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<!-- Theme Color for Mobile -->
+<meta name="theme-color" content="#3498db">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LearnJournal">
+
+<!-- Single Icon for all platforms -->
+<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal - Chandandeep Singh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation will be inserted here by JavaScript -->
+
+    <main class="container">
+        <h1>Flask Backend & PythonAnywhere</h1>
+
+        <!-- Flask Backend Information Section -->
+        <section class="python-backend-section">
+            <h3>🚀 Flask Backend </h3>
+            <p>This Learning Journal now uses a Flask backend deployed on PythonAnywhere. All entries are stored in a JSON file on the server and served via RESTful API.</p>
+
+
+            <!-- Flask Backend Form -->
+            <div class="flask-form-section" style="margin-top: 2rem; padding: 1.5rem; background: rgba(155, 89, 182, 0.1); border-radius: 8px; border: 2px solid rgba(155, 89, 182, 0.3);">
+                <h4 style="color: #8e44ad; margin-bottom: 1rem;">Add Reflection via Flask Backend</h4>
+                <form id="flask-journal-form">
+                    <div class="form-group">
+                        <label for="flask-name">Name:</label>
+                        <input type="text" id="flask-name" name="name" placeholder="Your name" required style="border-color: #8e44ad;">
+                    </div>
+                    <div class="form-group">
+                        <label for="flask-reflection">Reflection:</label>
+                        <textarea id="flask-reflection" name="reflection" rows="4"
+                                  placeholder="What did you learn this week? What did you find challenging?"
+                                  required style="border-color: #8e44ad;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);">
+                        ➕ Add to Flask Backend
+                    </button>
+                </form>
+            </div>
+
+            <div class="backend-actions" style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                <button onclick="refreshFlaskData()" class="btn-primary" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+                    🔄 Refresh Flask Data
+                </button>
+                <button onclick="showFlaskInfo()" class="btn-primary" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">
+                    ℹ️ Flask Backend Info
+                </button>
+                <button onclick="exportFlaskData()" class="btn-primary" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                    📥 Export JSON
+                </button>
+                <button onclick="clearAllReflections()" class="btn-primary" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                    🗑️ Clear All (Extra Feature)
+                </button>
+            </div>
+
+            <div id="flask-info" style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px; display: none;"></div>
+        </section>
+
+        <!-- Reflection Counter (Added by JavaScript) -->
+        <div id="reflection-counter-container"></div>
+
+        <!-- Local Journal Entry Form  -->
+        <section class="journal-form-section">
+            <h2>Add New Journal Entry (Local Storage)</h2>
+            <p class="form-description">Fill out the form below to add a new journal entry to local storage. You can edit or delete these entries later.</p>
+            <form id="journal-form">
+                <div class="form-group">
+                    <label for="journal-title">Title:</label>
+                    <input type="text" id="journal-title" name="title" placeholder="e.g., Week 6 Reflection" required>
+                </div>
+                <div class="form-group">
+                    <label for="journal-entry">Entry Content:</label>
+                    <textarea id="journal-entry" name="entry" rows="6"
+                              placeholder="Write your journal entry here (minimum 10 words)..."
+                              minlength="50" required></textarea>
+                    <small>Minimum 50 characters required. Your entry will be saved in browser storage.</small>
+                    <div id="word-count" class="word-count" style="margin-top: 0.5rem;"></div>
+                </div>
+                <button type="submit" class="btn-primary">Add Journal Entry</button>
+            </form>
+        </section>
+
+        <!-- Journal Entries Container - NEWEST FIRST -->
+        <div id="journal-entries-container">
+            <!-- Flask backend entries will be loaded here AT THE TOP -->
+
+            <!-- Local storage entries will be loaded here -->
+
+
+
+            <!-- Week 7: PWA Enhancement -->
+<article class="journal-entry collapsible">
+    <div class="collapsible-header">
+        <h2>Week 7: Progressive Web App Enhancement</h2>
+        <div class="entry-actions">
+            <span class="toggle-icon">▼</span>
+        </div>
+    </div>
+    <div class="collapsible-content">
+        <div class="entry-meta">November 2025</div>
+
+        <h3>Lab 7 Journal Questions & Answers</h3>
+
+        <h4>1. Why is it useful to enhance your Flask app with PWA features?</h4>
+        <p>Enhancing Flask with PWA capabilities gives the web application a more native experience. It offers offline capability, push alerts, installation, and enhanced performance through caching. Users can install the app on their devices and use it even when they are not connected to the internet, dramatically increasing accessibility and user engagement.</p>
+
+        <h4>2. What did you use to support offline access and dynamic data?</h4>
+        <p>I used the Cache Storage API to create a service worker with selective caching. For static assets, I followed a cache-first technique. For dynamic API data, I employed a network-first technique with cached data as a fallback. The Fetch API handles all network requests and provides adequate offline fallbacks. I also designed a bespoke offline page to enhance the user experience.</p>
+
+        <h4>3. What extra feature did you add, and why?</h4>
+        <p>I created real-time network status detection to notify users when they are online or offline. This gives instant feedback and regulates user expectations around data availability. In addition, I implemented background sync readiness and push notification support for future updates, making the app more engaging and responsive.</p>
+
+        <h4>4. Did you face any challenges deploying your PWA, and how did you solve them?</h4>
+        <p>The key challenge was correctly establishing the service worker scope and cache techniques. I fixed this by experimenting with different caching algorithms and adding suitable error handling. Another problem was to ensure the manifest.JSON was served with the correct MIME types, which I solved by adding explicit routes to Flask.</p>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 8px;">
+            <h4>🚀 PWA Features Implemented</h4>
+            <p><strong>Installability:</strong> Web App Manifest with proper icons and metadata</p>
+            <p><strong>Offline Support:</strong> Service Worker with strategic caching</p>
+            <p><strong>Network Resilience:</strong> Intelligent fallbacks for API calls</p>
+            <p><strong>Extra Features:</strong> Network status indicator, background sync readiness</p>
+        </div>
+
+        <!-- Network Status Indicator -->
+        <div id="network-status" style="margin-top: 1rem; padding: 0.5rem 1rem; border-radius: 20px; color: white; text-align: center; font-weight: bold; transition: all 0.3s ease;">
+            Checking network status...
+        </div>
+    </div>
+</article>
+
+  <!-- Week 6: Flask Backend & PythonAnywhere (NEWEST STATIC ENTRY) -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 6: Flask Backend & PythonAnywhere</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">November 2025</div>
+
+                    <h3>Lab 6 Journal Questions & Answers</h3>
+
+                    <h4>1. Why is the frontend–backend connection important?</h4>
+                    <p>The frontend-backend connection is critical because it allows for persistent data storage beyond individual browser sessions, numerous users accessing and sharing the same data, server-side validation and security, and more complex business logic that cannot be handled client-side. It divides responsibility for display (frontend) and data management (backend).</p>
+
+                    <h4>2. Which HTTP methods did you use in Flask, and why?</h4>
+                    <p>I used Flask to construct three primary HTTP methods: GET, which retrieves all reflections from the server, POST, which adds new reflections with appropriate data validation, and DELETE, which is an additional functionality for deleting particular entries. These techniques offer full CRUD (Create, Read, Update, Delete) operations and adhere to RESTful principles.</p>
+
+                    <h4>3. What is the difference between using Flask to store and load JSON data and reading JSON directly in the browser?</h4>
+                    <p>Flask saves data on the server permanently, making it available to all users and surviving browser sessions. Direct JSON reading is client-side only, confined to specific browsers, and lacks genuine permanence. Flask also supports server-side processing, validation, and can handle several concurrent users.</p>
+
+                    <h4>4. Did you face any difficulties when running your project on PythonAnywhere? How did you handle them?</h4>
+                    <p>Yes, I had path setup difficulties where Flask couldn't identify the templates and static directories. This was fixed by utilising absolute paths using os.path.dirname(os.path.abspath(__file__)). Furthermore, sufficient WSGI configuration was necessary to import the Flask application instance.</p>
+
+                    <h4>5. What extra feature did you build into your PWA with Flask, and why did you add it?</h4>
+                    <p>To give complete control, I added the DELETE functionality for individual reflections. This allows users to delete entries they no longer want, making the application more useful and user-friendly. It exhibits good RESTful API design by utilising different HTTP methods.</p>
+
+                    </div>
+                </div>
+            </article>
+
+           <!-- Week 5: Python & JSON Backend Data (NEWEST STATIC ENTRY) -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 5: Python & JSON Backend Data</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">November 2025</div>
+
+                    <h3>Lab 5 Journal Questions & Answers</h3>
+
+                    <h4>1. How is storing data in a JSON file different from using browser storage?</h4>
+                    <p>JSON files are cross-platform and version controlled. They are saved as physical files that can be accessed by several applications. Browser storage is device-specific, limited to 5-10MB, and only available through JavaScript inside the same browser.</p>
+
+                    <h4>2. How did you use Python to create or update your JSON file?</h4>
+                    <p>In order to handle the JSON file intelligently, save_entry.py was created. It reads current entries, adds new ones with automated timestamps, and safely writes everything back with correct formatting and error handling for reliability.</p>
+
+                    <h4>3. What does your PWA show locally, and what will users see on GitHub? Are they the same? Why or why not?</h4>
+                    <p>When Python adds entries, live JSON updates are displayed in local development. GitHub Pages pauses JSON during commit time because it only serves static files and does no backend processing. They remain in sync because of the manual commits.</p>
+
+                    <h4>4. What extra feature did you add to your PWA using the JSON file, and why?</h4>
+                    <p>Added an interactive statistics dashboard that counts and categorises data based on its source (JSON, Local, or Static). This clearly displays the Python-JS data flow and offers instant feedback when new entries are added, enhancing both functionality and learning experience.</p>
+                    </div>
+            </article>
+
+
+            <!-- Week 4: Introduction to APIs -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 4: Introduction to APIs</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">October 2025</div>
+                    <h3>Which Storage, Browser, and Third-Party APIs did you choose, and why?</h3>
+                    <p><strong>Storage API:</strong> Enhanced local storage for journal entries and theme choices, including Session Storage as a backup option. It was chosen for its simplicity and widespread browser support.</p>
+                    <p><strong>Browser API:</strong> Clipboard API for copying journal entries and improved Validation API for form validation. These considerably improve the overall user experience.</p>
+                    <p><strong>Third-Party API:</strong> The YouTube Player API allows you to connect with educational videos. We choose video content since it improves the learning experience.</p>
+
+                    <h3>How did you integrate each API with DOM manipulation?</h3>
+                    <p><strong>Storage API:</strong> localStorage.setItem() saves data and then dynamically builds DOM elements on load.</p>
+                    <p><strong>Clipboard API:</strong> Added copy buttons to journal entries that use navigator.clipboard.writeText() and provide visual feedback.</p>
+                    <p><strong>YouTube API:</strong> YT.Player() generates embedded video, custom buttons manage player using API functions.</p>
+
+                    <h3>What challenges did you encounter, and how did you solve them?</h3>
+                    <p><strong>Clipboard API permissions:</strong> Some browsers require a secure context (HTTPS). Error handling and backup messages were included.</p>
+                    <p><strong>YouTube API loading:</strong> The API script needed to load before being initialised. I used the onYouTubeIframeAPIReady callback.</p>
+                    <p><strong>Overlapping buttons:</strong> Stop button moved off-screen; corrected with CSS Grid and responsive layouts.</p>
+
+                    <h3>In what ways do these APIs improve your Learning Journal PWA?</h3>
+                    <p><strong>Persistence:</strong> When the browser is closed, users' entries and preferences are saved.</p>
+                    <p><strong>Usability:</strong> One-click copying and quick form response.</p>
+                    <p><strong>Rich Content:</strong> Video integration improves learning.</p>
+                    <p><strong>Professional appearance:</strong> Native app experience with smooth interactions.</p>
+                </div>
+            </article>
+
+            <!-- Week 3: JavaScript & DOM Manipulation -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 3: JavaScript & DOM Manipulation</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">October 2025</div>
+                    <h3>Which DOM selection methods did you use, and why did you choose them?</h3>
+                    <p>I used getElementById() for single items such as the live date and theme toggle because it is quick and precise. Due to its flexibility and ability to take CSS selectors, I also utilised querySelectorAll() for many items, such as collapsable sections.</p>
+
+                    <h3>What was the most challenging part about linking JavaScript with your HTML?</h3>
+                    <p>The most difficult aspect was ensuring that the JavaScript loaded at the appropriate time and that all DOM elements were available when the scripts attempted to access them. This timing issue was resolved by using the DOMContentLoaded event.</p>
+
+                    <h3>How did you test and debug your JavaScript code?</h3>
+                    <p>I used browser developer tools extensively, including console.log for debugging data, the Elements tab for checking DOM structure, and for myself testing all interactive features on various screen sizes to verify responsiveness.</p>
+                </div>
+            </article>
+
+            <!-- Week 2: Frontend Fundamentals -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 2: Frontend Fundamentals</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">October 2025</div>
+                    <h3>Mobile-First Design Approach</h3>
+                    <p>I began by designing with mobile devices in mind, utilising a layout with one column that eventually expands on larger screens. This method ensured that the essential content and functionality worked flawlessly on reduced viewports.</p>
+
+                    <h3>Most Useful HTML/CSS Concept</h3>
+                    <p>The CSS Flexbox concept was the most helpful one I used to create responsive layout structures and navigation. With Flexbox, creating flexible components that adjust to various screen sizes without requiring intricate computations was simple.</p>
+
+                    <h3>Most Challenging Aspect</h3>
+                    <p>The hardest things for me were choosing a breakpoint and media queries. To enable smooth transitions between layouts, the ideal breakpoints for various devices needed to be tested and adjusted.</p>
+                </div>
+            </article>
+
+            <!-- Week 1: Introduction to Mobile Development (OLDEST) -->
+            <article class="journal-entry collapsible">
+                <div class="collapsible-header">
+                    <h2>Week 1: Introduction to Mobile Development</h2>
+                    <div class="entry-actions">
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                </div>
+                <div class="collapsible-content">
+                    <div class="entry-meta">September 2025</div>
+                    <p>Initial setup and understanding of Progressive Web Apps. Learned about the course structure and project requirements. Explored the basics of HTML and CSS for creating responsive web layouts.</p>
+
+                    <h3>Key Learnings</h3>
+                    <p>Understood the importance of Progressive Web Apps in modern web development and how they bridge the gap between web and mobile applications. Learned about the project requirements for the Learning Journal PWA.</p>
+
+                    <h3>Setup Process</h3>
+                    <p>Set up the initial project structure with proper folder organization, created the basic HTML pages, and established the GitHub repository for version control.</p>
+                </div>
+            </article>
+        </div>
+
+        <!-- Enhanced YouTube API Section -->
+        <section class="youtube-section">
+            <h2>🎬 Learning Resources</h2>
+            <p>Watch this tutorial video about JavaScript APIs to enhance your understanding:</p>
+
+            <div class="youtube-player-container">
+                <div id="youtube-player"></div>
+            </div>
+
+            <div id="youtube-controls">
+                <!-- Enhanced controls will be added by JavaScript -->
+            </div>
+
+            <div class="storage-demo">
+                <h4>💾 Hybrid Storage System</h4>
+                <p>This PWA now uses both Flask backend on PythonAnywhere and browser local storage. Theme preferences are saved using browser storage while journal entries can be stored both locally and on the Flask backend.</p>
+                <button onclick="showStorageInfo()" class="btn-primary">Show Storage Information</button>
+                <div id="storage-info" style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Chandandeep Singh. All rights reserved.</p>
+    </footer>
+
+          <!-- ALL THE JS FILES - IN CORRECT ORDER -->
+    <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/thirdparty.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // ===== ENHANCED SERVICE WORKER - FIXED OFFLINE NAVIGATION =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Use absolute path - CRITICAL
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ ServiceWorker registered successfully with scope:', registration.scope);
+
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('🔄 New Service Worker found...');
+
+                            newWorker.addEventListener('statechange', () => {
+                                console.log('🔄 Service Worker state:', newWorker.state);
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('🔄 New content available!');
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.log('❌ ServiceWorker registration failed:', error);
+                    });
+
+                // Handle controller changes
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        console.log('🔄 Controller changed - reloading page');
+                        window.location.reload();
+                    }
+                });
+            });
+        }
+
+        // ===== ONLINE/OFFLINE DETECTION =====
+        function updateOnlineStatus() {
+            const statusElement = document.getElementById('network-status');
+            if (statusElement) {
+                if (navigator.onLine) {
+                    statusElement.innerHTML = '🟢 Online';
+                    statusElement.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+                    // Auto-hide after 3 seconds when online
+                    setTimeout(() => {
+                        if (navigator.onLine && statusElement.innerHTML === '🟢 Online') {
+                            statusElement.style.display = 'none';
+                        }
+                    }, 3000);
+                } else {
+                    statusElement.innerHTML = '🔴 Offline - Using cached content';
+                    statusElement.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+                    statusElement.style.display = 'block';
+                }
+            }
+        }
+
+        // Initialize online/offline detection
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        document.addEventListener('DOMContentLoaded', updateOnlineStatus);
+
+        // ===== PWA INSTALLATION =====
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('📱 PWA install prompt available');
+        });
+
+        // Make functions globally available
+        window.updateOnlineStatus = updateOnlineStatus;
+    </script>
+
+</body>
+</html>
