@@ -1,4 +1,4 @@
-// static/js/sw.js - SERVICE WORKER FIXED FOR OFFLINE NAVIGATION
+// static/js/sw.js - SERVICE WORKER 
 
 const CACHE_NAME = 'learning-journal-offline-fixed-v4';
 const STATIC_CACHE = 'static-v4';
@@ -268,4 +268,5 @@ async function serveOfflinePage() {
         </html>`,
         { status: 200, headers: { 'Content-Type': 'text/html' } }
     );
+
 }
