@@ -56,14 +56,14 @@
     </footer>
 
 
-      <!-- ALL THE JS FILES - IN CORRECT ORDER -->
+     <!-- ALL THE JS FILES - IN CORRECT ORDER -->
     <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
     <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
     <script src="{{ url_for('static', filename='js/thirdparty.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <script>
-        // ===== ENHANCED SERVICE WORKER - FIXED OFFLINE NAVIGATION =====
+        // ===== SERVICE WORKER  =====
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 // Use absolute path - CRITICAL
