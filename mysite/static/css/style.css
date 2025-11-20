@@ -428,7 +428,7 @@ body {
     margin-left: auto;
 }
 
-/* Improved Toggle Icon */
+/* Toggle Icon */
 .toggle-icon {
     transition: transform 0.3s ease;
     font-size: 0.9rem;
@@ -458,7 +458,7 @@ body {
     background: rgba(52, 152, 219, 0.2);
 }
 
-/* Enhanced Collapsible Header */
+/*  Collapsible Header */
 .collapsible-header {
     cursor: pointer;
     padding: 1.2rem 1.5rem;
@@ -607,7 +607,7 @@ body {
     padding: 4px;
 }
 
-/* ===== YOUTUBE PLAYER FIXES ===== */
+/* ===== YOUTUBE PLAYER ===== */
 #youtube-player {
     width: 720px;
     height: 405px;
@@ -616,7 +616,7 @@ body {
     display: block;
 }
 
-/* ===== FIXED YOUTUBE CONTROLS - NO OVERLAPPING ===== */
+/* ===== FIXED YOUTUBE CONTROLS ===== */
 #youtube-controls {
     margin-top: 1.5rem;
     display: flex;
@@ -1413,7 +1413,7 @@ body {
 
     /* Network Status Mobile */
     #network-status {
-        top: 90px; /* MOVED DOWN from 70px to 90px */
+        top: 90px; 
         right: 10px;
         font-size: 0.7rem;
         padding: 0.4rem 0.8rem;
@@ -1500,7 +1500,7 @@ body {
     }
 
     #network-status {
-        top: 85px; /* MOVED DOWN from 65px to 85px */
+        top: 85px; 
         right: 5px;
         font-size: 0.65rem;
         padding: 0.3rem 0.6rem;
@@ -1684,4 +1684,5 @@ body {
 /* Success/Error message z-index */
 .success-message, .error-message {
     z-index: 2000 !important;
+
 }
